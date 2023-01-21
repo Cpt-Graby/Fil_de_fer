@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/20 21:04:09 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/21 11:27:46 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_map {
 	int		max_h;
 	int		win_w;
 	int		win_h;
-	t_line	*tab_line;
+	int		*tab_line;
 }	t_map;
 
 //main.c
@@ -57,6 +57,16 @@ int		main_file_parser(char *path, t_map *map);
 //file_check_entension.c
 int		check_extension_filename(char *path);
 
+//fdf_error.c
+int		syscall_error_return(char *msg, int value_2_return);
+void	syscall_error_exit(char *msg, int value_2_exit);
+int		set_errno_and_return(int error, int value_2_return);
+void	set_errno_and_exit(int error, char *msg, int value_2_return);
+
+//get_map_height_width.c
+void	get_map_height_and_width(int fd, int *val_height, int *val_width);
+int		count_word(char *str, char sep);
+
 //file_2_data.c
 int		map_parser(int fd, t_map *map);
 void	get_first_info_parser(char *line, t_map *map);
@@ -64,10 +74,9 @@ t_line	*get_next_pts_line(t_map *map, char **tab);
 int		new_line_2_tab(char *line, t_map *map);
 
 //utils
-int		check_extension(char *path);
 int		check_line(char *str);
 void	free_t_line(t_line *line, int len);
-int	vec3_in_screen(t_vec3 vec, int max_L, int max_H);
+int		vec3_in_screen(t_vec3 vec, int max_L, int max_H);
 void	set_window_size(t_map *map);
 float	set_zoom(t_map *map);
 

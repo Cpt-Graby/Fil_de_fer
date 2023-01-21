@@ -1,67 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_file_parser.c                                 :+:      :+:    :+:   */
+/*   fdf_main_file_parser.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:59:56 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/20 21:23:06 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:35:21 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	count_word(char *str, char sep)
-{
-	int	i;
-	int	count_sep;
-
-	i = 0;
-	count_sep = 0;
-	while (str[i] == sep && str[i])
-		i++;
-	if (!str[i])
-		return (count_sep);
-	while (str[i])
-	{
-		if (str[i] == sep)
-		{
-			count_sep++;
-			while (str[i] == sep && str[i])
-				i++;
-		}
-		else
-			i++;
-	}
-	return (count_sep + 1);
-}
-
-static void	get_map_height_and_width(int fd, int *val_height, int *val_width)
+int	get_map_data_from_fd(int fd, t_map *map)
 {
 	char	*line;
+	int		nbr_elem;
+	int		i;
 
+	i = 0;
+	nbr_elem = map->line * map->column;
 	line = get_next_line(fd);
 	if (!line)
+		syscall_error_return("check_and_get_map_data", 0);
+	map->tab_line = malloc(sizeof(int) * nbr_elem);
+	if (!map->tab_line)
 	{
-		perror("get_val_height_and_wight - main_file_parcer.c");
-		exit(-1);
-	}
-	*val_height = 0;
-	*val_width = count_word(line, ' ');
-	if (val_width == 0)
-	{
-		perror("No arguments in first line");
 		free(line);
-		close (fd);
-		exit (-1);
+		syscall_error_return("check_and_get_map_data", 0);
 	}
 	while (line)
 	{
+		get_data_from_line(line, &i, &map->tab_line);
 		free(line);
 		line = get_next_line(fd);
-		(*val_height)++;
+		if (!line)
+			return (-1); // TODO FREE DATA
 	}
+	return (1);
 }
 
 int	main_file_parser(char *path, t_map *map)
@@ -70,15 +46,16 @@ int	main_file_parser(char *path, t_map *map)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("main_file_parser.c");
-		return (0);
-	}
+		syscall_error_return("main_file_parser", 0);
 	get_map_height_and_width(fd, &(map->line), &(map->column));
-	if (close (fd) == -1)
-	{
-		perror("main_file_parser.c");
+	if (close(fd) == -1)
+		syscall_error_return("main_file_parser", 0);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		syscall_error_return("main_file_parser", 0);
+	if (get_map_data_from_fd(fd, map) == 0)
 		return (0);
-	}
+	if (close (fd) == -1)
+		syscall_error_return("main_file_parser", 0);
 	return (1);
 }
