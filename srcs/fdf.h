@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/21 11:27:46 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/22 11:26:22 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_map {
 	int		max_h;
 	int		win_w;
 	int		win_h;
-	int		*tab_line;
+	int		*tab_coord;
 }	t_map;
 
 //main.c

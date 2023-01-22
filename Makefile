@@ -10,9 +10,9 @@ SRCS =		srcs/main.c \
 			srcs/fdf_get_map_height_width.c \
 			srcs/fdf_error.c \
 			srcs/fdf_key_event.c\
-			srcs/fdf_mlx.c \
-			srcs/fdf_bresenham.c \
 			srcs/fdf_parse_utils.c
+			#srcs/fdf_mlx.c \
+			#srcs/fdf_bresenham.c \
 			#srcs/fdf_file2data.c \
 
 OBJS =		$(SRCS:.c=.o)
