@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/22 11:26:22 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:42 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ typedef struct s_img_dt {
 	int		bits_per_pixel;
 	int		line_lth;
 	int		endian;
-	int		win_w;
-	int		win_h;
 }	t_img_dt;
 
 typedef struct s_vars_w{
@@ -44,15 +42,20 @@ typedef struct s_map {
 	int		max_h;
 	int		win_w;
 	int		win_h;
-	int		*tab_coord;
+	float	**coordinate;
 }	t_map;
 
 //main.c
 int		main(int argc, char **argv);
 int		fdf_core(char *path);
 
-//main_file_parser.c
+//fdf_main_file_parser.c
 int		main_file_parser(char *path, t_map *map);
+void	set_next_word(char **index_string, char sep);
+void	get_data_from_line(char *string, int *index, float **tab, int max_col);
+
+//fdf_get_coordinate.c
+int		get_map_data_from_fd(int fd, t_map *map);
 
 //file_check_entension.c
 int		check_extension_filename(char *path);

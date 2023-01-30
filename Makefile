@@ -1,6 +1,6 @@
 NAME =		fdf
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror
+CFLAGS =	-Wall -Wextra -Werror -g
 # -fsanitize=address
 RM =		rm -f
 LIBFT =		-L./42lib -lft
@@ -8,6 +8,7 @@ SRCS =		srcs/main.c \
 			srcs/fdf_main_file_parser.c \
 			srcs/fdf_file_extension_checker.c\
 			srcs/fdf_get_map_height_width.c \
+			srcs/fdf_get_coordinate.c \
 			srcs/fdf_error.c \
 			srcs/fdf_key_event.c\
 			srcs/fdf_parse_utils.c
