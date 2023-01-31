@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:54:09 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/20 21:09:02 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/31 01:10:12 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	fdf_core(char *path)
 	}
 	if (!main_file_parser(path, &map))
 		exit(-1);
-	ft_printf("height:%d- width:%d\n", map.line, map.column);
 	/*
 	vars.mlx = mlx_init();
 	img.win_h = map.win_h;

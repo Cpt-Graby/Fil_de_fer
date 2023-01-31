@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/30 21:24:42 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/31 01:18:24 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ int		fdf_core(char *path);
 
 //fdf_main_file_parser.c
 int		main_file_parser(char *path, t_map *map);
-void	set_next_word(char **index_string, char sep);
-void	get_data_from_line(char *string, int *index, float **tab, int max_col);
 
 //fdf_get_coordinate.c
 int		get_map_data_from_fd(int fd, t_map *map);
+void	get_data_from_line(char *string, int *index, float **tab, int max_col);
+void	set_next_word(char **index_string, char sep);
+float	**create_float_tab(int column, int line);
 
 //file_check_entension.c
 int		check_extension_filename(char *path);
@@ -71,10 +72,10 @@ void	get_map_height_and_width(int fd, int *val_height, int *val_width);
 int		count_word(char *str, char sep);
 
 //file_2_data.c
-int		map_parser(int fd, t_map *map);
-void	get_first_info_parser(char *line, t_map *map);
-t_line	*get_next_pts_line(t_map *map, char **tab);
-int		new_line_2_tab(char *line, t_map *map);
+//int		map_parser(int fd, t_map *map);
+//void	get_first_info_parser(char *line, t_map *map);
+//t_line	*get_next_pts_line(t_map *map, char **tab);
+//int		new_line_2_tab(char *line, t_map *map);
 
 //utils
 int		check_line(char *str);

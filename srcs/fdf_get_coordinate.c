@@ -6,22 +6,29 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:44:10 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/30 21:30:16 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/31 01:14:19 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	set_next_word(char **index_string, char sep)
+int	get_map_data_from_fd(int fd, t_map *map)
 {
-	char	*next;
+	char	*line;
+	int		i;
 
-	next = *index_string;
-	while (*next != sep)
-		next++;
-	while (*next == sep)
-		next++;
-	index_string = &next;
+	i = 0;
+	map->coordinate = create_float_tab(map->column, map->line);
+	line = get_next_line(fd);
+	if (!line)
+		syscall_error_exit("check_and_get_map_data", -1);
+	while (i < map->line)
+	{
+		get_data_from_line(line, &i, map->coordinate, map->column);
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (1);
 }
 
 void	get_data_from_line(char *string, int *index, float **tab, int max_col)
@@ -36,11 +43,22 @@ void	get_data_from_line(char *string, int *index, float **tab, int max_col)
 	while (y < max_col)
 	{
 		tab[*index][y] = (float) ft_atoi(start_number);
-		printf("%p - %f \n",start_number, tab[*index][y]);
 		set_next_word(&start_number, ' ');
 		y++;
 	}
 	*index = *index + 1;
+}
+
+void	set_next_word(char **index_string, char sep)
+{
+	char	*next;
+
+	next = *index_string;
+	while (*next != sep)
+		next++;
+	while (*next == sep)
+		next++;
+	*index_string = next;
 }
 
 float	**create_float_tab(int column, int line)
@@ -60,24 +78,4 @@ float	**create_float_tab(int column, int line)
 		i++;
 	}
 	return (new_tab);
-}
-
-int	get_map_data_from_fd(int fd, t_map *map)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	map->coordinate = create_float_tab(map->column, map->line);
-	line = get_next_line(fd);
-	if (!line)
-		syscall_error_exit("check_and_get_map_data", -1);
-	while (i < map->line)
-	{
-		printf("-------------------\n");
-		get_data_from_line(line, &i, map->coordinate, map->column);
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (1);
 }

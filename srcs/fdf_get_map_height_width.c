@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 00:01:35 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/21 12:01:42 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/31 01:20:59 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void	get_map_height_and_width(int fd, int *val_height, int *val_width)
 		close (fd);
 		set_errno_and_exit(EINVAL, "get_map_height_and_width-Invalid_map", -1);
 	}
-	while (line && (count_word(line, ' ') == *val_width))
+	while (line && (count_word(line, ' ') <= *val_width))
 	{
 		free(line);
 		line = get_next_line(fd);
 		(*val_height)++;
 	}
-	if (line && count_word(line, ' ') != *val_width)
+	if (line && count_word(line, ' ') >= *val_width)
 	{
 		free(line);
 		set_errno_and_exit(EINVAL, "get_map_height_and_width-Invalid_map", -1);
