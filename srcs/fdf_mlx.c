@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:55 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/22 12:12:14 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/31 01:45:10 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	transfer_2_screen(t_map *map, t_img_dt *data)
 		x++;
 	}
 }
-/
+
 void	line_2_img(t_map *map, t_img_dt *data, int x)
 {
 	int		i;
@@ -55,8 +55,8 @@ void	column_2_img(t_map *map, t_img_dt *data, int x)
 	i = 1;
 	while (i < map->line)
 	{
-		iso_transf(map->tab_coord[i - 1], &pt1_sc, map);
-		iso_transf(map->tab_coord[i], &pt2_sc, map);
+		iso_transf(map->coordinate[i - 1], &pt1_sc, map);
+		iso_transf(map->coordinate[i], &pt2_sc, map);
 		draw_line(pt1_sc, pt2_sc, data);
 		i++;
 	}

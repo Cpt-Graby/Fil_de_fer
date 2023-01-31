@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/31 01:18:24 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/01/31 01:42:53 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_img_dt {
 	int		bits_per_pixel;
 	int		line_lth;
 	int		endian;
+	int		win_w;
+	int		win_h;
 }	t_img_dt;
 
 typedef struct s_vars_w{
