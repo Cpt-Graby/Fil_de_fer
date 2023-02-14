@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:55 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/14 00:15:19 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:25:03 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map)
 	float	trsy;
 
 	zoom = 1.0 * set_zoom(map);
-	trsx = (float)(map->column / 2) * (-1);
-	trsy = (float)(map->line / 2) * (-1);
+	trsx = ((float)map->column / 2) * (-1);
+	trsy = ((float)map->line / 2) * (-1);
 	x_transf_iso = (point.x - point.y) * cos(0.523599);
 	y_transf_iso = ((-1) * point.z + (point.x + point.y)) * sin(0.523599);
-	screen->x = map->win_w / 2 + (x_transf_iso + trsx) * zoom;
-	screen->y = map->win_h / 2 + (y_transf_iso + trsy) * zoom;
+	screen->x = (float)map->win_w / 2 + (x_transf_iso + trsx) * zoom;
+	screen->y = (float)map->win_h / 2 + (y_transf_iso + trsy) * zoom;
 	screen->z = point.z;
 }
 
