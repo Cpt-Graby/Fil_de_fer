@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/31 01:42:53 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:42:57 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef struct s_map {
 
 //main.c
 int		main(int argc, char **argv);
-int		fdf_core(char *path);
+int		fdf_core(t_map *map);
+int		transfer_2_img(t_map *map, t_img_dt *img);
 
 //fdf_main_file_parser.c
 int		main_file_parser(char *path, t_map *map);

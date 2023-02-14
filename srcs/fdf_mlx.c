@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:55 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/31 01:45:10 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/14 00:15:19 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,20 @@ void	transfer_2_screen(t_map *map, t_img_dt *data)
 void	line_2_img(t_map *map, t_img_dt *data, int x)
 {
 	int		i;
+	t_vec3	tmp;
 	t_vec3	pt1_sc;
 	t_vec3	pt2_sc;
 
 	i = 1;
+	tmp.x = i - 1;
+	tmp.y = x;
+	tmp.z = map->coordinate[x][i - 1];
 	while (i < map->column)
 	{
-		iso_transf(map->tab_coord[x], &pt1_sc, map);
-		iso_transf(map->tab_coord[x], &pt2_sc, map);
+		iso_transf(tmp, &pt1_sc, map);
+		tmp.x = i;
+		tmp.z = map->coordinate[x][i];
+		iso_transf(tmp, &pt2_sc, map);
 		draw_line(pt1_sc, pt2_sc, data);
 		i++;
 	}
@@ -49,14 +55,20 @@ void	line_2_img(t_map *map, t_img_dt *data, int x)
 void	column_2_img(t_map *map, t_img_dt *data, int x)
 {
 	int		i;
+	t_vec3	tmp;
 	t_vec3	pt1_sc;
 	t_vec3	pt2_sc;
 
 	i = 1;
+	tmp.x = x;
+	tmp.y = i - 1;
+	tmp.z = map->coordinate[i - 1][x];
 	while (i < map->line)
 	{
-		iso_transf(map->coordinate[i - 1], &pt1_sc, map);
-		iso_transf(map->coordinate[i], &pt2_sc, map);
+		iso_transf(tmp, &pt1_sc, map);
+		tmp.y = i;
+		tmp.z = map->coordinate[i][x];
+		iso_transf(tmp, &pt2_sc, map);
 		draw_line(pt1_sc, pt2_sc, data);
 		i++;
 	}
@@ -84,7 +96,7 @@ void	pixel_2img(t_img_dt *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x > 0 && x <= data->win_w) && (y > 0 && y < data->win_h))
+	if ((x > 0 && x < data->win_w) && (y > 0 && y < data->win_h))
 	{
 	dst = data->addr + (y * data->line_lth + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;

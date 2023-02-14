@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:44:10 by agonelle          #+#    #+#             */
-/*   Updated: 2023/01/31 01:14:19 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/14 00:56:55 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	get_map_data_from_fd(int fd, t_map *map)
 	char	*line;
 	int		i;
 
-	i = 0;
 	map->coordinate = create_float_tab(map->column, map->line);
 	line = get_next_line(fd);
 	if (!line)
 		syscall_error_exit("check_and_get_map_data", -1);
+	i = 0;
 	while (i < map->line)
 	{
 		get_data_from_line(line, &i, map->coordinate, map->column);
@@ -46,6 +46,7 @@ void	get_data_from_line(char *string, int *index, float **tab, int max_col)
 		set_next_word(&start_number, ' ');
 		y++;
 	}
+	start_number = string;
 	*index = *index + 1;
 }
 
@@ -54,7 +55,7 @@ void	set_next_word(char **index_string, char sep)
 	char	*next;
 
 	next = *index_string;
-	while (*next != sep)
+	while (*next != sep && *next != '\0')
 		next++;
 	while (*next == sep)
 		next++;
