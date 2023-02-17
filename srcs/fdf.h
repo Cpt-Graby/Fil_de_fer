@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/09 16:42:57 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:21:59 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_map {
 	int		line;
 	int		column;
 	int		max_h;
+	t_vec3	barycenter;
 	int		win_w;
 	int		win_h;
 	float	**coordinate;
@@ -73,13 +74,7 @@ void	set_errno_and_exit(int error, char *msg, int value_2_return);
 //get_map_height_width.c
 void	get_map_height_and_width(int fd, int *val_height, int *val_width);
 int		count_word(char *str, char sep);
-
-//file_2_data.c
-//int		map_parser(int fd, t_map *map);
-//void	get_first_info_parser(char *line, t_map *map);
-//t_line	*get_next_pts_line(t_map *map, char **tab);
-//int		new_line_2_tab(char *line, t_map *map);
-
+//
 //utils
 int		check_line(char *str);
 void	free_t_line(t_line *line, int len);
@@ -91,7 +86,7 @@ float	set_zoom(t_map *map);
 int		close_win(int keycode, t_vars *vars);
 int		print_key(int keycode, t_vars *vars);
 
-//fdf_mlx.c
+//fdf_projection_to_screen.c
 void	transfer_2_screen(t_map *map, t_img_dt *data);
 void	column_2_img(t_map *map, t_img_dt *data, int x);
 void	line_2_img(t_map *map, t_img_dt *data, int x);
@@ -99,6 +94,7 @@ void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map);
 void	pixel_2img(t_img_dt *data, int x, int y, int color);
 
 // fdf_bresenham.c
+void	set_var(t_vec2 *e, t_vec2 *del, t_vec2 *d, t_vec2 *inc);
 void	case_dx_dy(t_vec2 e, t_vec3 p1, t_vec3 p2, t_img_dt *data);
 void	case_dy_dx(t_vec2 e, t_vec3 p1, t_vec3 p2, t_img_dt *data);
 void	draw_line(t_vec3 p1, t_vec3 p2, t_img_dt *data);

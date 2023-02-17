@@ -1,19 +1,20 @@
 NAME =		fdf
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror 
+# -g -fsanitize=address -pg
+#  gprof name.out	
 RM =		rm -f
 LIBFT =		-L./42lib -lft
 SRCS =		srcs/main.c \
 			srcs/fdf_main_file_parser.c \
 			srcs/fdf_file_extension_checker.c\
 			srcs/fdf_get_map_height_width.c \
-			srcs/fdf_get_coordinate.c \
+			srcs/fdf_extract_map_data.c \
 			srcs/fdf_error.c \
 			srcs/fdf_key_event.c\
 			srcs/fdf_parse_utils.c \
 			srcs/fdf_bresenham.c \
-			srcs/fdf_mlx.c 
-			#srcs/fdf_file2data.c \
+			srcs/fdf_projection_on_screen.c 
 
 OBJS =		$(SRCS:.c=.o)
 

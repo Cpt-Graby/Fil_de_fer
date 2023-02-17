@@ -6,20 +6,26 @@
 /*   By: agonelle <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:16:03 by agonelle          #+#    #+#             */
-/*   Updated: 2022/11/22 13:03:48 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:46:36 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	set_var(t_vec2 *e, t_vec2 *del, t_vec2 *d, t_vec2 *inc)
+void	draw_line(t_vec3 p1, t_vec3 p2, t_img_dt *data)
 {
-	d->x = 2 * e->x;
-	d->y = 2 * e->y;
-	del->x = e->x;
-	del->y = e->y;
-	inc->x = 1;
-	inc->y = 1;
+	t_vec3	p1p;
+	t_vec3	p2p;
+	t_vec2	e;
+
+	ft_cp_vec3(p1, &p1p);
+	ft_cp_vec3(p2, &p2p);
+	e.x = abs((int) p2p.x - (int) p1p.x);
+	e.y = abs((int) p2p.y - (int) p1p.y);
+	if (e.x > e.y)
+		case_dx_dy(e, p1p, p2p, data);
+	else if (e.y > e.x)
+		case_dy_dx(e, p1p, p2p, data);
 }
 
 void	case_dx_dy(t_vec2 e, t_vec3 p1, t_vec3 p2, t_img_dt *data)
@@ -76,18 +82,12 @@ void	case_dy_dx(t_vec2 e, t_vec3 p1, t_vec3 p2, t_img_dt *data)
 	}
 }
 
-void	draw_line(t_vec3 p1, t_vec3 p2, t_img_dt *data)
+void	set_var(t_vec2 *e, t_vec2 *del, t_vec2 *d, t_vec2 *inc)
 {
-	t_vec3	p1p;
-	t_vec3	p2p;
-	t_vec2	e;
-
-	ft_cp_vec3(p1, &p1p);
-	ft_cp_vec3(p2, &p2p);
-	e.x = abs((int) p2p.x - (int) p1p.x);
-	e.y = abs((int) p2p.y - (int) p1p.y);
-	if (e.x > e.y)
-		case_dx_dy(e, p1p, p2p, data);
-	else if (e.y > e.x)
-		case_dy_dx(e, p1p, p2p, data);
+	d->x = 2 * e->x;
+	d->y = 2 * e->y;
+	del->x = e->x;
+	del->y = e->y;
+	inc->x = 1;
+	inc->y = 1;
 }

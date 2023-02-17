@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_mlx.c                                          :+:      :+:    :+:   */
+/*   fdf_projection_on_screen.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 14:04:55 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/14 10:25:03 by agonelle         ###   ########.fr       */
+/*   Created: 2023/02/17 10:29:19 by agonelle          #+#    #+#             */
+/*   Updated: 2023/02/17 11:59:26 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,17 @@ void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map)
 	float	trsx;
 	float	trsy;
 
-	zoom = 1.0 * set_zoom(map);
-	trsx = ((float)map->column / 2) * (-1);
-	trsy = ((float)map->line / 2) * (-1);
+//	zoom = 1.0 * set_zoom(map);
+	zoom = 15;
+//	trsx = ((float)map->column / 2) * (-1);
+	trsx = (map->barycenter.x - map->barycenter.y) * cos(0.523599);
+//	trsy = ((float)map->line / 2) * (-1);
+	trsy = (map->barycenter.z
+			+ (map->barycenter.x + map->barycenter.y)) * sin(0.523599);
 	x_transf_iso = (point.x - point.y) * cos(0.523599);
 	y_transf_iso = ((-1) * point.z + (point.x + point.y)) * sin(0.523599);
 	screen->x = (float)map->win_w / 2 + (x_transf_iso + trsx) * zoom;
-	screen->y = (float)map->win_h / 2 + (y_transf_iso + trsy) * zoom;
+	screen->y = (float)map->win_h / 2 + (y_transf_iso - trsy) * zoom;
 	screen->z = point.z;
 }
 
@@ -96,7 +100,7 @@ void	pixel_2img(t_img_dt *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x > 0 && x < data->win_w) && (y > 0 && y < data->win_h))
+	if ((x > 0 && x < data->win_h) && (y > 0 && y < data->win_w))
 	{
 	dst = data->addr + (y * data->line_lth + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
