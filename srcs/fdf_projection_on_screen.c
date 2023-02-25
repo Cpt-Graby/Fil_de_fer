@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:29:19 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/17 11:59:26 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:39:32 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	pixel_2img(t_img_dt *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x > 0 && x < data->win_h) && (y > 0 && y < data->win_w))
+	if ((x > 0 && x < data->win_w) && (y > 0 && y < data->win_h))
 	{
 	dst = data->addr + (y * data->line_lth + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;

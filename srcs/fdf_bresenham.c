@@ -6,7 +6,7 @@
 /*   By: agonelle <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:16:03 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/17 10:46:36 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:39:39 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	case_dx_dy(t_vec2 e, t_vec3 p1, t_vec3 p2, t_img_dt *data)
 		inc.x = -1;
 	if (p1.y > p2.y)
 		inc.y = -1;
-	while (i <= del.x && vec3_in_screen(p1, data->win_w, data->win_h))
+	while (i <= del.x)
 	{
 		pixel_2img(data, p1.x, p1.y, 0x00FF0000);
 		i++;
@@ -68,7 +68,7 @@ void	case_dy_dx(t_vec2 e, t_vec3 p1, t_vec3 p2, t_img_dt *data)
 		inc.x = -1;
 	if (p1.y > p2.y)
 		inc.y = -1;
-	while (i <= del.y && vec3_in_screen(p1, data->win_w, data->win_h))
+	while (i <= del.y)
 	{
 		pixel_2img(data, p1.x, p1.y, 0x00FF0000);
 		i++;
