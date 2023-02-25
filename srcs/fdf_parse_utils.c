@@ -6,58 +6,11 @@
 /*   By: kino </var/spool/mail/kino>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:18:35 by kino              #+#    #+#             */
-/*   Updated: 2023/01/20 17:55:48 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:27:31 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	check_line(char *str)
-{
-	int	i;
-	int	flag;
-
-	flag = 1;
-	i = 0;
-	while (str[i] && flag)
-	{
-		if (!ft_isprint(str[i]) && str[i] != '\n')
-			flag = 0;
-		i++;
-	}
-	if (flag == 0)
-	{
-		errno = EIO;
-		return (0);
-	}
-	return (1);
-}
-
-void	free_t_line(t_line *line, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		free(line->tab_pts);
-		i++;
-	}
-	free(line);
-}
-
-int	vec3_in_screen(t_vec3 vec, int max_L, int max_H)
-{
-	int	y;
-	int	x;
-
-	x = (int)(vec.x);
-	y = (int)(vec.y);
-	if (((int) vec.x <= 0 || x >= max_L) || ((int) vec.y <= 0 || y >= max_H))
-		return (0);
-	else
-		return (1);
-}
 
 void	set_window_size(t_map *map)
 {
@@ -73,6 +26,30 @@ void	set_window_size(t_map *map)
 		map->win_h = 800;
 	else
 		map->win_h = 1200;
+}
+
+
+void	get_barycenter(t_map *map)
+{
+	int	x;
+	int	y;
+	int	sum;
+
+	sum = 0;
+	x = 0;
+	while (x < map->line)
+	{
+		y = 0;
+		while (y < map->column)
+		{
+			sum += map->coordinate[x][y];
+			y++;
+		}
+		x++;
+	}
+	map->barycenter.z = (float) sum / (map->column * map->line);
+	map->barycenter.x = (float) map->line / 2;
+	map->barycenter.y = (float) map->column / 2;
 }
 
 float	set_zoom(t_map *map)

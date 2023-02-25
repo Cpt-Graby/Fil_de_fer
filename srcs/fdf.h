@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/25 22:14:20 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:27:01 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	get_data_from_line(char *string, int *index, float **tab, int max_col);
 void	set_next_word(char **index_string, char sep);
 float	**create_float_tab(int column, int line);
 
-//file_check_entension.c
+//file_file_main_checker.c
+void	check_file_and_extract_map_data(char *path, t_map *map);
 int		check_extension_filename(char *path);
 
 //fdf_error.c
@@ -76,9 +77,7 @@ void	get_map_height_and_width(int fd, int *val_height, int *val_width);
 int		count_word(char *str, char sep);
 //
 //utils
-int		check_line(char *str);
-void	free_t_line(t_line *line, int len);
-int		vec3_in_screen(t_vec3 vec, int max_L, int max_H);
+void	get_barycenter(t_map *map);
 void	set_window_size(t_map *map);
 float	set_zoom(t_map *map);
 
