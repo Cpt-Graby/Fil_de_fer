@@ -1,8 +1,6 @@
 NAME =		fdf
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror 
-# -g -fsanitize=address -pg
-#  gprof name.out	
 RM =		rm -f
 LIBFT =		-L./42lib -lft
 SRCS =		srcs/main.c \

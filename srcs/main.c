@@ -6,30 +6,11 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:54:09 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/25 22:00:52 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:03:57 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	print_map_z_values(t_map *map)
-{
-	for (int i = 0; i < map->line; i++)
-	{
-		for (int j = 0; j < map->column; j++)
-		{
-			if(map->coordinate[i][j] == 0)
-			{
-				printf(" %.2f ", map->coordinate[i][j]);
-			}
-			else
-			{
-				printf("%.2f ", map->coordinate[i][j]);
-			}
-		}
-		printf("\n");
-	}
-}
 
 static void	get_barycenter(t_map *map)
 {
