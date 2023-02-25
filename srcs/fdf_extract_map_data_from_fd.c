@@ -6,13 +6,13 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:32:09 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/17 10:34:55 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:11:26 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	get_map_data_from_fd(int fd, t_map *map)
+int	extract_map_data_from_fd(int fd, t_map *map)
 {
 	char	*line;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/17 11:21:59 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:14:20 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int		transfer_2_img(t_map *map, t_img_dt *img);
 //fdf_main_file_parser.c
 int		main_file_parser(char *path, t_map *map);
 
-//fdf_get_coordinate.c
-int		get_map_data_from_fd(int fd, t_map *map);
+//fdf_extract_map_data_from_fd.c
+int		extract_map_data_from_fd(int fd, t_map *map);
 void	get_data_from_line(char *string, int *index, float **tab, int max_col);
 void	set_next_word(char **index_string, char sep);
 float	**create_float_tab(int column, int line);

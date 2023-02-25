@@ -7,7 +7,7 @@ SRCS =		srcs/main.c \
 			srcs/fdf_main_file_parser.c \
 			srcs/fdf_file_extension_checker.c\
 			srcs/fdf_get_map_height_width.c \
-			srcs/fdf_extract_map_data.c \
+			srcs/fdf_extract_map_data_from_fd.c \
 			srcs/fdf_error.c \
 			srcs/fdf_key_event.c\
 			srcs/fdf_parse_utils.c \

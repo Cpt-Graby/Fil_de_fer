@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:59:56 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/14 00:32:00 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:12:25 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main_file_parser(char *path, t_map *map)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		syscall_error_return("main_file_parser", 0);
-	tmp = get_map_data_from_fd(fd, map);
+	tmp = extract_map_data_from_fd(fd, map);
 	if (tmp == 0 && errno != -1)
 		syscall_error_return("main_file_parser", 0);
 	if (tmp == 0)
