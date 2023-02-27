@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:29:19 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/25 21:39:32 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:03:33 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	line_2_img(t_map *map, t_img_dt *data, int x)
 	tmp.z = map->coordinate[x][i - 1];
 	while (i < map->column)
 	{
-		iso_transf(tmp, &pt1_sc, map);
+		iso_transf(tmp, &pt1_sc, map, 0);
 		tmp.x = i;
 		tmp.z = map->coordinate[x][i];
-		iso_transf(tmp, &pt2_sc, map);
+		iso_transf(tmp, &pt2_sc, map, 0);
 		draw_line(pt1_sc, pt2_sc, data);
 		i++;
 	}
@@ -65,28 +65,25 @@ void	column_2_img(t_map *map, t_img_dt *data, int x)
 	tmp.z = map->coordinate[i - 1][x];
 	while (i < map->line)
 	{
-		iso_transf(tmp, &pt1_sc, map);
+		iso_transf(tmp, &pt1_sc, map, 0);
 		tmp.y = i;
 		tmp.z = map->coordinate[i][x];
-		iso_transf(tmp, &pt2_sc, map);
+		iso_transf(tmp, &pt2_sc, map, 0);
 		draw_line(pt1_sc, pt2_sc, data);
 		i++;
 	}
 }
 
-void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map)
+void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map, float zoom)
 {
-	float	zoom;
 	float	y_transf_iso;
 	float	x_transf_iso;
 	float	trsx;
 	float	trsy;
 
-//	zoom = 1.0 * set_zoom(map);
-	zoom = 15;
-//	trsx = ((float)map->column / 2) * (-1);
+	if (zoom == 0)
+		zoom = map->zoom;
 	trsx = (map->barycenter.x - map->barycenter.y) * cos(0.523599);
-//	trsy = ((float)map->line / 2) * (-1);
 	trsy = (map->barycenter.z
 			+ (map->barycenter.x + map->barycenter.y)) * sin(0.523599);
 	x_transf_iso = (point.x - point.y) * cos(0.523599);

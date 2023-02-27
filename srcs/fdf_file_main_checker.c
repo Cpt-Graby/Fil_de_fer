@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:53:51 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/25 22:21:42 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:35:42 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	check_file_and_extract_map_data(char *path, t_map *map)
 	get_barycenter(map);
 	map->win_h = 600;
 	map->win_w = 800;
+	map->zoom = set_zoom(map);
 }
 
 int	check_extension_filename(char *path)

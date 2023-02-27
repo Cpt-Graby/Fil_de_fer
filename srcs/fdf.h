@@ -6,7 +6,7 @@
 /*   By: agonelle <agonelle@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:18:50 by agonelle          #+#    #+#             */
-/*   Updated: 2023/02/25 22:27:01 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:08:44 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ typedef struct s_map {
 	char	*path;
 	int		line;
 	int		column;
-	int		max_h;
 	t_vec3	barycenter;
 	int		win_w;
 	int		win_h;
 	float	**coordinate;
+	float	zoom;
 }	t_map;
 
 //main.c
@@ -89,7 +89,7 @@ int		print_key(int keycode, t_vars *vars);
 void	transfer_2_screen(t_map *map, t_img_dt *data);
 void	column_2_img(t_map *map, t_img_dt *data, int x);
 void	line_2_img(t_map *map, t_img_dt *data, int x);
-void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map);
+void	iso_transf(t_vec3 point, t_vec3 *screen, t_map *map, float zoom);
 void	pixel_2img(t_img_dt *data, int x, int y, int color);
 
 // fdf_bresenham.c

@@ -6,7 +6,7 @@
 /*   By: kino </var/spool/mail/kino>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:18:35 by kino              #+#    #+#             */
-/*   Updated: 2023/02/25 22:27:31 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:30:52 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	set_window_size(t_map *map)
 	else
 		map->win_h = 1200;
 }
-
 
 void	get_barycenter(t_map *map)
 {
@@ -52,26 +51,54 @@ void	get_barycenter(t_map *map)
 	map->barycenter.y = (float) map->column / 2;
 }
 
-float	set_zoom(t_map *map)
+int	check_in_screen(t_vec3 point_to_check, int max_width, int max_height)
 {
-	float	zoom1;
-	float	zoom2;
-
-	if (map->column >= 0 && map->column < 99)
-		zoom1 = 10.0;
-	else if (map->column >= 100 && map->column < 500)
-		zoom1 = 5.0;
-	else
-		zoom1 = 1.0;
-	if (map->line >= 0 && map->line < 99)
-		zoom2 = 10.0;
-	else if (map->line >= 100 && map->line < 500)
-		zoom2 = 5.0;
-	else
-		zoom2 = 1.0;
-	if (zoom1 > zoom2)
-		return (zoom2);
-	else
-		return (zoom1);
+	if ((int) point_to_check.x < 0 || (int) point_to_check.x > max_width
+		|| (int) point_to_check.y < 0 || (int) point_to_check.y > max_height)
+		return (0);
+	return (1);
 }
 
+int	check_4_corner_in_screen(int zoom, t_vec3 point, t_vec3 screen, t_map *map)
+{
+	point.x = 0;
+	point.y = 0;
+	point.z = map->coordinate[(int) point.x][(int) point.y];
+	iso_transf(point, &screen, map, zoom);
+	if (check_in_screen(screen, map->win_w, map->win_h) == 0)
+		return (0);
+	point.x = 0;
+	point.y = map->column - 1;
+	point.z = map->coordinate[(int) point.x][(int) point.y];
+	iso_transf(point, &screen, map, zoom);
+	if (check_in_screen(screen, map->win_w, map->win_h) == 0)
+		return (0);
+	point.x = map->line - 1;
+	point.y = 0;
+	point.z = map->coordinate[(int) point.x][(int) point.y];
+	iso_transf(point, &screen, map, zoom);
+	if (check_in_screen(screen, map->win_w, map->win_h) == 0)
+		return (0);
+	point.y = map->column - 1;
+	point.z = map->coordinate[(int) point.x][(int) point.y];
+	iso_transf(point, &screen, map, zoom);
+	if (check_in_screen(screen, map->win_w, map->win_h) == 0)
+		return (0);
+	return (1);
+}
+
+float	set_zoom(t_map *map)
+{
+	int		zoom;
+	t_vec3	point;
+	t_vec3	screen;
+
+	zoom = 50;
+	while (zoom > 1)
+	{
+		if (check_4_corner_in_screen(zoom, point, screen, map) == 1)
+			break ;
+		zoom--;
+	}
+	return ((float)zoom);
+}
