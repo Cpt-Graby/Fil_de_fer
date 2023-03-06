@@ -6,7 +6,7 @@
 /*   By: kino </var/spool/mail/kino>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:18:35 by kino              #+#    #+#             */
-/*   Updated: 2023/02/27 12:30:52 by agonelle         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:23:01 by agonelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ float	set_zoom(t_map *map)
 	t_vec3	point;
 	t_vec3	screen;
 
+	point.x = 0;
+	point.y = 0;
+	point.z = 0;
+	screen.x = 0;
+	screen.y = 0;
+	screen.z = 0;
 	zoom = 50;
 	while (zoom > 1)
 	{
